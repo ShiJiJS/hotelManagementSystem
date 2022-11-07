@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htmgmt.mapper.RoomTypeMapper">
+    <insert id="save">
+        insert into roomtypes (type,numberOfPerson,remark) VALUES
+            (#{type},#{numberOfPerson},#{remark});
+    </insert>
+
+    <update id="update">
+        update roomtypes
+        <set>
+            <if test="type != null">type = #{type},</if>
+            <if test="numberOfPerson != null">numberOfPerson = #{numberOfPerson},</if>
+            <if test="remark != null">remark = #{remark}</if>
+        </set>
+        where id = #{id};
+    </update>
+
+    <delete id="deleteByIds">
+        delete from roomtypes where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectAll" resultType="RoomType">
+        select * from roomtypes;
+    </select>
+
+    <select id="selectById" resultType="com.htmgmt.pojo.RoomType">
+        select * from roomtypes where id = #{id};
+    </select>
+
+    <select id="selectByFields" resultType="com.htmgmt.pojo.RoomType">
+        select * from roomtypes
+        <where>
+            <if test="id != null">and id = #{id}</if>
+            <if test="type != null">and type = #{type}</if>
+            <if test="numberOfPerson != null">and numberOfPerson = #{numberOfPerson}</if>
+            <if test="remark != null">and remark = #{remark}</if>
+        </where>
+    </select>
+</mapper>

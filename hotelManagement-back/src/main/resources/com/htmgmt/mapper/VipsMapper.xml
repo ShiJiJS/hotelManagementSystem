@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htmgmt.mapper.VipsMapper">
+    <!--配置字段名*2-->
+    <insert id="save">
+        insert into Vips (name, gender, password, phoneNumber, address, email, mark, level, latestCheckInTime, latestReserveTime, remark)
+        values (#{name},#{gender},#{password},#{phoneNumber},#{address},#{email},#{mark},#{level},#{latestCheckInTime},#{latestReserveTime},#{remark});
+    </insert>
+    <!--配置字段名*3-->
+    <update id="update">
+        update Vips
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="phoneNumber != null">phoneNumber = #{phoneNumber},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="mark != null">mark = #{mark},</if>
+            <if test="level != null">level = #{level},</if>
+            <if test="latestCheckInTime != null">latestCheckInTime = #{latestCheckInTime},</if>
+            <if test="latestReserveTime != null">latestReserveTime = #{latestReserveTime},</if>
+            <if test="remark != null">remark = #{remark}</if>
+        </set>
+        where id = #{id};
+    </update>
+
+    <delete id="deleteByIds">
+        delete from Vips where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectAll" resultType="com.htmgmt.pojo.Vips">
+        select * from Vips;
+    </select>
+
+    <select id="selectById" resultType="com.htmgmt.pojo.Vips">
+        select * from Vips where id = #{id};
+    </select>
+
+    <select id="selectByFields" resultType="com.htmgmt.pojo.Vips">
+        select * from vips
+        <where>
+            <if test="id != null">and id = #{id}</if>
+            <if test="name != null">and name = #{name}</if>
+            <if test="gender != null">and gender = #{gender}</if>
+            <if test="password != null">and password = #{password}</if>
+            <if test="phoneNumber != null">and phoneNumber = #{phoneNumber}</if>
+            <if test="address != null">and address = #{address}</if>
+            <if test="email != null">and email = #{email}</if>
+            <if test="mark != null">and mark = #{mark}</if>
+            <if test="level != null">and level = #{level}</if>
+            <if test="latestCheckInTime != null">and latestCheckInTime = #{latestCheckInTime}</if>
+            <if test="latestReserveTime != null">and latestReserveTime = #{latestReserveTime}</if>
+            <if test="remark != null">and remark = #{remark}</if>
+        </where>
+    </select>
+
+</mapper>

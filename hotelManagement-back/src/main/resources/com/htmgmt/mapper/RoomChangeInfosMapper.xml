@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htmgmt.mapper.RoomChangeInfosMapper">
+    <!--配置字段名*2-->
+    <insert id="save">
+        insert into RoomChangeInfos (id, originalRoomNumber, afterRoomNumber, roomType, standardPrice, discountPrice,
+                                     deposit, personName, certificateCategory, certificateNumber, phoneNumber,
+                                     arriveTime, leaveTime, numberOfOccupants, operator, vipId, vipPrice,
+                                     breakfast, wakeUp, remark)
+        values (#{id},#{originalRoomNumber},#{afterRoomNumber},#{roomType},#{standardPrice},#{discountPrice},
+                #{deposit},#{personName},#{certificateCategory},#{certificateNumber},#{phoneNumber},
+                #{arriveTime},#{leaveTime},#{numberOfOccupants},#{operator},#{vipId},#{vipPrice},
+                #{breakfast},#{wakeUp},#{remark});
+    </insert>
+    <!--配置字段名*3-->
+    <update id="update">
+        update RoomChangeInfos
+        <set>            
+            <if test="originalRoomNumber != null">originalRoomNumber = #{originalRoomNumber},</if>
+            <if test="afterRoomNumber != null">afterRoomNumber = #{afterRoomNumber},</if>
+            <if test="roomType != null">roomType = #{roomType},</if>
+            <if test="standardPrice != null">standardPrice = #{standardPrice},</if>
+            <if test="discountPrice != null">discountPrice = #{discountPrice},</if>
+            <if test="deposit != null">deposit = #{deposit},</if>
+            <if test="personName != null">personName = #{personName},</if>
+            <if test="certificateCategory != null">certificateCategory = #{certificateCategory},</if>
+            <if test="certificateNumber != null">certificateNumber = #{certificateNumber},</if>
+            <if test="phoneNumber != null">phoneNumber = #{phoneNumber},</if>
+            <if test="arriveTime != null">arriveTime = #{arriveTime},</if>
+            <if test="leaveTime != null">leaveTime = #{leaveTime},</if>
+            <if test="numberOfOccupants != null">numberOfOccupants = #{numberOfOccupants},</if>
+            <if test="operator != null">operator = #{operator},</if>
+            <if test="vipId != null">vipId = #{vipId},</if>
+            <if test="vipPrice != null">vipPrice = #{vipPrice},</if>
+            <if test="breakfast != null">breakfast = #{breakfast},</if>
+            <if test="wakeUp != null">wakeUp = #{wakeUp},</if>
+            <if test="remark != null">remark = #{remark}</if>
+        </set>
+        where id = #{id};
+    </update>
+
+    <delete id="deleteByIds">
+        delete from RoomChangeInfos where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectAll" resultType="com.htmgmt.pojo.RoomChangeInfos">
+        select * from RoomChangeInfos;
+    </select>
+
+    <select id="selectById" resultType="com.htmgmt.pojo.RoomChangeInfos">
+        select * from RoomChangeInfos where id = #{id};
+    </select>
+    
+    <!--配置字段名 + id + and -, -->
+    <select id="selectByFields" resultType="com.htmgmt.pojo.RoomChangeInfos">
+        select * from RoomChangeInfos
+        <where>
+            <if test="id != null">and id = #{id},</if>
+            <if test="originalRoomNumber != null">and originalRoomNumber = #{originalRoomNumber}</if>
+            <if test="afterRoomNumber != null">and afterRoomNumber = #{afterRoomNumber}</if>
+            <if test="roomType != null">and roomType = #{roomType}</if>
+            <if test="standardPrice != null">and standardPrice = #{standardPrice}</if>
+            <if test="discountPrice != null">and discountPrice = #{discountPrice}</if>
+            <if test="deposit != null">and deposit = #{deposit}</if>
+            <if test="personName != null">and personName = #{personName}</if>
+            <if test="certificateCategory != null">and certificateCategory = #{certificateCategory}</if>
+            <if test="certificateNumber != null">and certificateNumber = #{certificateNumber}</if>
+            <if test="phoneNumber != null">and phoneNumber = #{phoneNumber}</if>
+            <if test="arriveTime != null">and arriveTime = #{arriveTime}</if>
+            <if test="leaveTime != null">and leaveTime = #{leaveTime}</if>
+            <if test="numberOfOccupants != null">and numberOfOccupants = #{numberOfOccupants}</if>
+            <if test="operator != null">and operator = #{operator}</if>
+            <if test="vipId != null">and vipId = #{vipId}</if>
+            <if test="vipPrice != null">and vipPrice = #{vipPrice}</if>
+            <if test="breakfast != null">and breakfast = #{breakfast}</if>
+            <if test="wakeUp != null">and wakeUp = #{wakeUp}</if>
+            <if test="remark != null">and remark = #{remark}</if>
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,53 @@
+html,
+body,
+#app {
+  /* 覆写意义不明的默认四周白色margin…… */
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  min-width: 1366px;
+}
+
+@media print {
+  .el-button{
+    display: none!important;
+  }
+  @page {
+    /* 纵向打印 */
+    /* 打印时可能会出现错位，右上角叉号无法隐藏(?明明同样是el-button?) */
+    /* 以及打印比例过大Element-UI Form显示不全的情况 */
+    /* 此时需要手动降低比例，或直接选择Fit to printable area */
+    /* 待解决 2022/08/22 by Daniel Li */
+    size: portrait;
+    scale: auto;
+    width:100%!important;
+    padding:0!important;
+    margin:0!important;
+  }
+}
+
+.el-button--primary {
+  color: #FFF!important;
+  background-color: rgb(40, 111, 183)!important;
+  border-color: rgb(40, 111, 183)!important;
+}
+
+.el-submenu__title i {
+  color: rgb(255, 255, 255) !important;
+}
+
+.el-input.is-disabled .el-input__inner {
+  background-color: #fff!important;
+  border-color: #fff!important;
+  color: #000!important;
+  cursor: text!important;
+}
+
+
+.el-form-item {
+  margin-left: 20px !important;
+}
+
+.el-form-item__content {
+  margin-right: 20px !important;
+}

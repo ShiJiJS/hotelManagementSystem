@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htmgmt.mapper.GoodsMapper">
+    <!--配置字段名*2-->
+    <insert id="save">
+        insert into Goods (name, type, price, unit, remark)
+        values (#{name}, #{type}, #{price}, #{unit}, #{remark});
+    </insert>
+    <!--配置字段名*2-->
+    <update id="update">
+        update Goods
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="unit != null">unit = #{unit},</if>
+            <if test="remark != null">remark = #{remark}</if>
+        </set>
+        where id = #{id};
+    </update>
+
+    <delete id="deleteByIds">
+        delete from Goods where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectAll" resultType="com.htmgmt.pojo.Goods">
+        select *
+        from Goods;
+    </select>
+
+    <select id="selectById" resultType="com.htmgmt.pojo.Goods">
+        select *
+        from Goods
+        where id = #{id};
+    </select>
+
+    <select id="selectByFields" resultType="com.htmgmt.pojo.Goods">
+        select * from goods
+        <where>
+            <if test="id != null">and id = #{id}</if>
+            <if test="name != null">and name = #{name}</if>
+            <if test="type != null">and type = #{type}</if>
+            <if test="price != null">and price = #{price}</if>
+            <if test="unit != null">and unit = #{unit}</if>
+            <if test="remark != null">and remark = #{remark}</if>
+        </where>
+    </select>
+
+</mapper>

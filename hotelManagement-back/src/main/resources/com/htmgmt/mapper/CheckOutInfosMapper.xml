@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htmgmt.mapper.CheckOutInfosMapper">
+    <!--配置字段名*2-->
+    <insert id="save">
+        insert into CheckOutInfos (id, roomNumber, discountPrice, deposit, days, totalRoomPrice, goodsCost,
+                                   foodCost, phoneCost, actualReceivable, refundableDeposit, paymentMethod,
+                                   paidIn, `change`, operator, remark)
+        values (#{id},#{roomNumber},#{discountPrice},#{deposit},#{days},#{totalRoomPrice},#{goodsCost},#{foodCost},#{phoneCost},#{actualReceivable},#{refundableDeposit},#{paymentMethod},#{paidIn},#{change},#{operator},#{remark});
+    </insert>
+    <!--配置字段名*3-->
+    <update id="update">
+        update CheckOutInfos
+        <set>            
+            <if test="id != null">id = #{id},</if>
+            <if test="roomNumber != null">roomNumber = #{roomNumber},</if>
+            <if test="discountPrice != null">discountPrice = #{discountPrice},</if>
+            <if test="deposit != null">deposit = #{deposit},</if>
+            <if test="days != null">days = #{days},</if>
+            <if test="totalRoomPrice != null">totalRoomPrice = #{totalRoomPrice},</if>
+            <if test="goodsCost != null">goodsCost = #{goodsCost},</if>
+            <if test="foodCost != null">foodCost = #{foodCost},</if>
+            <if test="phoneCost != null">phoneCost = #{phoneCost},</if>
+            <if test="actualReceivable != null">actualReceivable = #{actualReceivable},</if>
+            <if test="refundableDeposit != null">refundableDeposit = #{refundableDeposit},</if>
+            <if test="paymentMethod != null">paymentMethod = #{paymentMethod},</if>
+            <if test="paidIn != null">paidIn = #{paidIn},</if>
+            <if test="change != null">`change` = #{change},</if>
+            <if test="operator != null">operator = #{operator},</if>
+            <if test="remark != null">remark = #{remark}</if>
+        </set>
+        where id = #{id};
+    </update>
+
+    <delete id="deleteByIds">
+        delete from CheckOutInfos where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectAll" resultType="com.htmgmt.pojo.CheckOutInfos">
+        select * from CheckOutInfos;
+    </select>
+
+    <select id="selectById" resultType="com.htmgmt.pojo.CheckOutInfos">
+        select * from CheckOutInfos where id = #{id};
+    </select>
+    
+    <!--配置字段名 + id + and -, -->
+    <select id="selectByFields" resultType="com.htmgmt.pojo.CheckOutInfos">
+        select * from CheckOutInfos
+        <where>
+            <if test="id != null">and id = #{id}</if>
+            <if test="roomNumber != null">and roomNumber = #{roomNumber}</if>
+            <if test="discountPrice != null">and discountPrice = #{discountPrice}</if>
+            <if test="deposit != null">and deposit = #{deposit}</if>
+            <if test="days != null">and days = #{days}</if>
+            <if test="totalRoomPrice != null">and totalRoomPrice = #{totalRoomPrice}</if>
+            <if test="goodsCost != null">and goodsCost = #{goodsCost}</if>
+            <if test="foodCost != null">and foodCost = #{foodCost}</if>
+            <if test="phoneCost != null">and phoneCost = #{phoneCost}</if>
+            <if test="actualReceivable != null">and actualReceivable = #{actualReceivable}</if>
+            <if test="refundableDeposit != null">and refundableDeposit = #{refundableDeposit}</if>
+            <if test="paymentMethod != null">and paymentMethod = #{paymentMethod}</if>
+            <if test="paidIn != null">and paidIn = #{paidIn}</if>
+            <if test="change != null">and `change` = #{change}</if>
+            <if test="operator != null">and operator = #{operator}</if>
+            <if test="remark != null">and remark = #{remark}</if>
+        </where>
+    </select>
+
+</mapper>

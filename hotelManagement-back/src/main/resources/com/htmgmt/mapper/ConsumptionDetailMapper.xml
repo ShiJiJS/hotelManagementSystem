@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htmgmt.mapper.ConsumptionDetailMapper">
+    <insert id="save">
+        insert into consumptiondetails (goodsName, count, unitPrice, consumePrice, discountRate, discountPrice, consumptionId) VALUES
+        (#{goodsName}, #{count}, #{unitPrice}, #{consumePrice}, #{discountRate}, #{discountPrice}, #{consumptionId});
+    </insert>
+
+    <update id="update">
+        update consumptiondetails
+        <set>
+            <if test="goodsName != null">goodsName = #{goodsName},</if>
+            <if test="count != null">count = #{count},</if>
+            <if test="unitPrice != null">unitPrice = #{unitPrice},</if>
+            <if test="consumePrice != null">consumePrice = #{consumePrice},</if>
+            <if test="discountRate != null">discountRate = #{discountRate},</if>
+            <if test="discountPrice != null">discountPrice = #{discountPrice},</if>
+            <if test="consumptionId != null">consumptionId = #{consumptionId},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteByIds">
+        delete from consumptiondetails where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+        <delete id="deleteByConsumptionId">
+        delete from consumptiondetails where consumptionId in
+        <foreach collection="consumptionIds" item="consumptionId" separator="," open="(" close=")">
+            #{consumptionId}
+        </foreach>
+    </delete>
+    <select id="selectAll" resultType="com.htmgmt.pojo.ConsumptionDetail">
+        select * from consumptiondetails;
+    </select>
+    <select id="selectById" resultType="com.htmgmt.pojo.ConsumptionDetail">
+        select * from consumptiondetails where id = #{id};
+    </select>
+
+    <select id="selectByFields" resultType="com.htmgmt.pojo.ConsumptionDetail">
+        select * from consumptiondetails
+        <where>
+            <if test="id != null">and id = #{id}</if>
+            <if test="goodsName != null">and goodsName = #{goodsName}</if>
+            <if test="count != null">and count = #{count}</if>
+            <if test="unitPrice != null">and unitPrice = #{unitPrice}</if>
+            <if test="consumePrice != null">and consumePrice = #{consumePrice}</if>
+            <if test="discountRate != null">and discountRate = #{discountRate}</if>
+            <if test="discountPrice != null">and discountPrice = #{discountPrice}</if>
+            <if test="consumptionId != null">and consumptionId = #{consumptionId}</if>
+        </where>
+    </select>
+
+
+</mapper>

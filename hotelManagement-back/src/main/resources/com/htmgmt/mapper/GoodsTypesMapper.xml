@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htmgmt.mapper.GoodsTypesMapper">
+
+    <insert id="save">
+        insert into goodstypes (name, remark)
+        values (#{name},#{remark});
+    </insert>
+
+    <update id="update">
+        update goodstypes
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="remark != null">remark = #{remark}</if>
+        </set>
+        where id = #{id};
+    </update>
+
+    <delete id="deleteByIds">
+        delete from goodstypes where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectAll" resultType="com.htmgmt.pojo.GoodsTypes">
+        select * from goodstypes;
+    </select>
+
+    <select id="selectById" resultType="com.htmgmt.pojo.GoodsTypes">
+        select * from goodstypes where id = #{id};
+    </select>
+
+    <select id="selectByFields" resultType="com.htmgmt.pojo.GoodsTypes">
+        select * from goodstypes
+        <where>
+            <if test="id != null">and id = #{id}</if>
+            <if test="name != null">and name = #{name}</if>
+            <if test="remark != null">and remark = #{remark}</if>
+        </where>
+    </select>
+
+
+
+</mapper>
