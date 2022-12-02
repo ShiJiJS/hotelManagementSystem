@@ -4,12 +4,11 @@
   <div class="login_container">
     <el-header>
       <div>
-        <img :src=logoURL alt="" />
-        <span>大连理工大学大黑山五星级大酒店客房管理系统</span>
+        <span>酒店客房管理系统</span>
       </div>
     </el-header>
     <div class="welcome">
-      <span>欢迎来到大连理工大学大黑山五星级大酒店客房管理系统!</span>
+      <span><p>欢迎进入酒店客房管理系统，请先登录</p></span>
     </div>
     <div class="login_box">
       <!--表单提交区域-->
@@ -33,71 +32,64 @@
 </template>
 
 <script>
-import global_ from './globalVar.vue'
+import global_ from "./globalVar.vue";
 export default {
-  name: 'loginPage',
+  name: "loginPage",
   data() {
     return {
-      logoURL: require('../assets/logo.png'),
       loginLoading: false, // 登录限制
       loginForm: {
         // 登录的表单数据的绑定对象
-        userName: '',
-        password: '',
+        userName: "",
+        password: "",
       },
       loginFormRules: {
         // 验证用户名是否合法
-        userName: [
-          { required: true, message: '请输入登录名称', trigger: 'blur' },
-        ],
+        userName: [{ required: true, message: "请输入登录名称", trigger: "blur" }],
         // 验证密码是否合法
-        password: [
-          { required: true, message: '请输入登录密码', trigger: 'blur' },
-        ],
+        password: [{ required: true, message: "请输入登录密码", trigger: "blur" }],
       },
-    }
+    };
   },
   methods: {
     resetLoginForm() {
       // 点击重置按钮,重置登录表单
       // this.$refs[loginFormRef].resetFields()
-      this.$refs.loginFormRef.resetFields()
+      this.$refs.loginFormRef.resetFields();
     },
     login() {
-      this.loginLoading = true
+      this.loginLoading = true;
       this.$refs.loginFormRef.validate(async (valid) => {
         if (!valid) {
-          return (this.loginLoading = false)
+          return (this.loginLoading = false);
         }
-        const { data: res } = await this.$http.post(
-          global_.serverSrc + '/login',
-          this.loginForm
-        )
+        const { data: res } = await this.$http.post(global_.serverSrc + "/login", this.loginForm);
         if (res.meta.status == 201) {
-          this.loginLoading = false
-          return this.$message.error('登录失败,没有查找到此用户')
+          this.loginLoading = false;
+          return this.$message.error("登录失败,没有查找到此用户");
         } else if (res.meta.status == 202) {
-          this.loginLoading = false
-          return this.$message.error('登录失败,密码错误!')
+          this.loginLoading = false;
+          return this.$message.error("登录失败,密码错误!");
         }
-        this.$message.success('登录成功!')
+        this.$message.success("登录成功!");
         // 1. 将登录成功之后的 token,保存到客户端的 sessionStorage(会话机制/只在当前页面生效)中 localStorage(持久话机制/关闭页面也不会忘记数据)
         //   1.1 项目中除了登录之外的API接口,必须在登录之后才能访问
         //   1.2 token 只应在当前网站打开期间生效, 所以将 token 保存在 sessionStorage中
-        window.sessionStorage.setItem('token', res.data.token)
+        window.sessionStorage.setItem("token", res.data.token);
         // 2. 通过编程式路由导航跳转到后台主页
-        this.$router.push('homePage')
-        this.loginLoading = false
-      })
+        this.$router.push("homePage");
+        this.loginLoading = false;
+      });
     },
   },
-}
+};
 </script>
 
 <style lang="less" scoped>
 .login_container {
   height: 100vh;
-  background-image: url('../assets/background.png');
+  //background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  background-color: #eeeeee;
   background-repeat: no-repeat;
   background-position: 50% 50%;
 }
@@ -106,49 +98,33 @@ export default {
   justify-content: space-between;
   align-items: center;
   background-color: rgb(40, 111, 183);
-  color: rgb(255, 255, 255);
+  // background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+  color: #000000;
   font-size: 24px;
   line-height: 72px;
   > div {
     display: flex;
     align-items: center;
-    img {
-      width: 60px;
-      height: 60px;
-      border-radius: 10%;
-    }
     span {
       margin-left: 8px;
     }
   }
 }
 .welcome {
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: rgb(255, 255, 255);
+  margin-top: 10%;
+  color: #555555;
   font-size: 36px;
-  line-height: 72px;
-  text-shadow: 0 0 5px rgb(40, 111, 183);
+}
+.welcome span {
+  width: 100%;
+  margin: auto 0;
+  text-align: center;
 }
 .login_box {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin: auto auto;
   width: 450px;
   height: 200px;
-  background-color: #fff;
-  border-style: solid;
-  border-width: thin;
-  border-color: rgb(235, 238, 245);
   .login_form {
-    box-sizing: border-box;
-    position: absolute;
-    top: 10%;
-    width: 100%;
-    padding: 0 20px;
   }
   .btns {
     display: flex;
