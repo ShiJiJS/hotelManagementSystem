@@ -50,13 +50,21 @@
     </el-table>
 
     <!-- 分页 -->
-    <el-pagination
+    <!-- <el-pagination
       background
       layout="prev, pager, next"
       :total="pages * 10"
       :current-page="currentPage"
-      @current-change="handleCurrentChange"></el-pagination>
+      @current-change="handleCurrentChange"></el-pagination> -->
 
+    <el-pagination
+      @current-change="handleCurrentChange"
+      @size-change="handleSizeChange"
+      :current-page.sync="currentPage"
+      :page-sizes="[2, 10, 20, 50]"
+      :page-size="itemsOnOnePage"
+      layout="sizes, prev, pager, next"
+      :total="pages * 2"></el-pagination>
     <!-- 添加对话框 -->
     <!--     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage4" :page-sizes="[20, 50, 100, 200]" :page-size="20"
       layout="total, sizes, prev, pager, next, jumper" :total="400" style="margin-top: 12px;text-align: center;">
@@ -349,6 +357,10 @@ export default {
     handleCurrentChange(val) {
       this.currentPage = val;
     },
+    handleSizeChange(val) {
+      this.itemsOnOnePage = val;
+      this.getTotalPages();
+    },
 
     //打开表格点击确定后添加客房信息的请求写在这里
     addRoom() {
@@ -453,8 +465,8 @@ export default {
       roomTypes: [],
       floors: [],
       searchForm: {},
-      itemsOnOnePage: 1,
-      pages: 100,
+      itemsOnOnePage: 2,
+      pages: 20,
       currentPage: 1,
     };
   },
@@ -462,7 +474,6 @@ export default {
     currentPage: {
       handler(newVal) {
         this.getAllRooms();
-        console.log("aaaaaaaa");
       },
     },
   },
