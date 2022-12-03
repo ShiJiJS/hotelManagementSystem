@@ -32,8 +32,9 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<Room> selectAll() {
-        return roomMapper.selectAll();
+    public List<Room> selectAll(Integer page,Integer size) {
+        Integer start = (page-1) * size;
+        return roomMapper.selectAll(start,size);
     }
 
     @Override
@@ -44,5 +45,15 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public List<Room> selectByFields(Room room) {
         return roomMapper.selectByFields(room);
+    }
+
+    @Override
+    public Integer totalPages(Integer size) {
+        Integer total = roomMapper.totalPages(size);
+        if(total  % size != 0){
+            return total / size + 1;
+        }else {
+            return total / size;
+        }
     }
 }

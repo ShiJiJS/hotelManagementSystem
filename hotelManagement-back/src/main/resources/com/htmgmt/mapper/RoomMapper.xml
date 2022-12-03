@@ -34,7 +34,7 @@
     </delete>
 
     <select id="selectAll" resultType="com.htmgmt.pojo.Room">
-        select * from rooms;
+        select * from rooms limit #{start},#{size};
     </select>
 
     <select id="selectById" resultType="com.htmgmt.pojo.Room">
@@ -54,6 +54,10 @@
             <if test="vipUserPrice != null">and vipUserPrice= #{vipUserPrice}</if>
             <if test="remark != null">and remark= #{remark}</if>
         </where>
+    </select>
+
+    <select id="totalPages" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM rooms
     </select>
 
 

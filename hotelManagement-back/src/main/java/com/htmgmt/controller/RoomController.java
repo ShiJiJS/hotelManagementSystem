@@ -27,12 +27,18 @@ public class RoomController {
         return new Result(flag,flag?Code.DELETE_OK:Code.DELETE_ERR);
     }
 
-    @GetMapping
-    public Result selectAll(){
-        List<Room> roomList = roomService.selectAll();
+    @GetMapping("/{page}/{size}")
+    public Result selectAll(@PathVariable Integer page,@PathVariable Integer size){
+        List<Room> roomList = roomService.selectAll(page,size);
         Integer code = roomList != null?Code.GET_OK:Code.GET_ERR;
         String msg = roomList != null?"":"查询失败";
         return new Result(roomList,code,msg);
+    }
+
+    @GetMapping("/totalPages/{size}")
+    public Result totalPages(@PathVariable Integer size){
+        Integer pages = roomService.totalPages(size);
+        return new Result(pages,Code.GET_OK);
     }
 
     @PutMapping

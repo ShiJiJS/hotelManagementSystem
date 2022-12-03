@@ -16,9 +16,11 @@ public interface RoomMapper {
 
     public void update(Room room);
 
-    public List<Room> selectAll();
+    public List<Room> selectAll(Integer start,Integer size);
 
     public Room selectById(Integer id);
 
     public List<Room> selectByFields(Room room);
+
+    public Integer totalPages(Integer size);
 }
