@@ -14,4 +14,5 @@ public interface RoomService {
     public Room selectById(Integer id);
     public List<Room> selectByFields(Room room);
     public Integer totalPages(Integer size);
+    public List<Room> selectAllWithOutPages();
 }

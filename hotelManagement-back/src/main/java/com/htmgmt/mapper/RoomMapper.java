@@ -23,4 +23,6 @@ public interface RoomMapper {
     public List<Room> selectByFields(Room room);
 
     public Integer totalPages(Integer size);
+
+    public List<Room> selectAllWithOutPages();
 }

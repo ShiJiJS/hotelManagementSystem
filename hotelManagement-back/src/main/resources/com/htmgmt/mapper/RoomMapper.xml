@@ -60,5 +60,9 @@
         SELECT COUNT(*) FROM rooms
     </select>
 
+    <select id="selectAllWithOutPages" resultType="com.htmgmt.pojo.Room">
+        select * from rooms
+    </select>
+
 
 </mapper>

@@ -35,6 +35,14 @@ public class RoomController {
         return new Result(roomList,code,msg);
     }
 
+    @GetMapping
+    public Result selectWithOutPages(){
+        List<Room> roomList = roomService.selectAllWithOutPages();
+        Integer code = roomList != null?Code.GET_OK:Code.GET_ERR;
+        String msg = roomList != null?"":"查询失败";
+        return new Result(roomList,code,msg);
+    }
+
     @GetMapping("/totalPages/{size}")
     public Result totalPages(@PathVariable Integer size){
         Integer pages = roomService.totalPages(size);

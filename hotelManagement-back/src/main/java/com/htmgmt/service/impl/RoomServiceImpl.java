@@ -56,4 +56,9 @@ public class RoomServiceImpl implements RoomService {
             return total / size;
         }
     }
+
+    @Override
+    public List<Room> selectAllWithOutPages() {
+        return roomMapper.selectAllWithOutPages();
+    }
 }
