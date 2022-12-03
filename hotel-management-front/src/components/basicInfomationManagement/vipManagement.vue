@@ -1,51 +1,36 @@
 <template>
   <div>
-    <el-breadcrumb separator-class="el-icon-arrow-right" style="font-size: 24px; margin-bottom: 12px;">
+    <el-breadcrumb separator-class="el-icon-arrow-right" style="font-size: 24px; margin-bottom: 12px">
       <el-breadcrumb-item>系统管理</el-breadcrumb-item>
       <el-breadcrumb-item>会员管理</el-breadcrumb-item>
     </el-breadcrumb>
-    <el-row :gutter="20" style="margin-bottom: 12px;">
+    <el-row :gutter="20" style="margin-bottom: 12px">
       <el-col :span="10">
-        <el-input style="line-height: 36px;" v-model="searchForm.id" placeholder="请输入会员编号">
-        </el-input>
+        <el-input style="line-height: 36px" v-model="searchForm.id" placeholder="请输入会员编号"></el-input>
       </el-col>
       <el-col :span="10">
-        <el-input style="line-height: 36px;" v-model="searchForm.name" placeholder="请输入会员名">
-          <el-button slot="append" icon="el-icon-search" @click="conditionQuery">
-          </el-button>
+        <el-input style="line-height: 36px" v-model="searchForm.name" placeholder="请输入会员名">
+          <el-button slot="append" icon="el-icon-search" @click="conditionQuery"></el-button>
         </el-input>
       </el-col>
       <el-col :span="2">
-        <el-button type="primary" @click="addVipDialogVisible = true">
-          添加会员
-        </el-button>
+        <el-button type="primary" @click="addVipDialogVisible = true">添加会员</el-button>
       </el-col>
       <el-col :span="2">
-        <el-button @click="massDeletionDialogVisible=true" type="danger">
-          批量删除
-        </el-button>
+        <el-button @click="massDeletionDialogVisible = true" type="danger">批量删除</el-button>
       </el-col>
     </el-row>
 
     <el-table :data="tableData" border style="width: 100%" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55">
-      </el-table-column>
-      <el-table-column prop="id" label="编号" width="180">
-      </el-table-column>
-      <el-table-column prop="name" label="姓名" width="180">
-      </el-table-column>
-      <el-table-column prop="gender" label="性别" width="90">
-      </el-table-column>
-      <el-table-column prop="phoneNumber" label="电话">
-      </el-table-column>
-      <el-table-column fixed="right" prop="mark" label="积分" width="180">
-      </el-table-column>
-      <el-table-column fixed="right" prop="level" label="等级" width="90">
-      </el-table-column>
-      <el-table-column fixed="right" prop="latestCheckInTime" label="最后一次入住时间" width="180">
-      </el-table-column>
-      <el-table-column fixed="right" prop="latestReserveTime" label="最后一次预约时间" width="180">
-      </el-table-column>
+      <el-table-column type="selection" width="55"></el-table-column>
+      <el-table-column prop="id" label="编号" width="180"></el-table-column>
+      <el-table-column prop="name" label="姓名" width="180"></el-table-column>
+      <el-table-column prop="gender" label="性别" width="90"></el-table-column>
+      <el-table-column prop="phoneNumber" label="电话"></el-table-column>
+      <el-table-column fixed="right" prop="mark" label="积分" width="180"></el-table-column>
+      <el-table-column fixed="right" prop="level" label="等级" width="90"></el-table-column>
+      <el-table-column fixed="right" prop="latestCheckInTime" label="最后一次入住时间" width="180"></el-table-column>
+      <el-table-column fixed="right" prop="latestReserveTime" label="最后一次预约时间" width="180"></el-table-column>
       <el-table-column fixed="right" label="操作" width="180">
         <template slot-scope="scope">
           <el-button @click="showEditDialog(scope.row.id)" type="primary">编辑</el-button>
@@ -98,13 +83,11 @@
         </el-form-item> -->
 
         <el-form-item label="最后一次入住时间" prop="latestCheckInTime">
-          <el-date-picker v-model="addVipForm.latestCheckInTime" type="datetime" placeholder="选择日期时间" default-time="12:00:00">
-          </el-date-picker>
+          <el-date-picker v-model="addVipForm.latestCheckInTime" type="datetime" placeholder="选择日期时间" default-time="12:00:00"></el-date-picker>
         </el-form-item>
 
         <el-form-item label="最后一次预约时间" prop="latestReserveTime">
-          <el-date-picker v-model="addVipForm.latestReserveTime" type="datetime" placeholder="选择日期时间" default-time="12:00:00">
-          </el-date-picker>
+          <el-date-picker v-model="addVipForm.latestReserveTime" type="datetime" placeholder="选择日期时间" default-time="12:00:00"></el-date-picker>
         </el-form-item>
 
         <el-form-item label="备注" prop="remark">
@@ -157,13 +140,21 @@
         </el-form-item> -->
 
         <el-form-item label="最后一次入住时间" prop="latestCheckInTime">
-          <el-date-picker v-model="editVipForm.latestCheckInTime" type="datetime" placeholder="选择日期时间" default-time="12:00:00">
-          </el-date-picker>
+          <el-date-picker
+            v-model="editVipForm.latestCheckInTime"
+            type="datetime"
+            placeholder="选择日期时间"
+            default-time="12:00:00"
+            value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
         </el-form-item>
 
         <el-form-item label="最后一次预约时间" prop="latestReserveTime">
-          <el-date-picker v-model="editVipForm.latestReserveTime" type="datetime" placeholder="选择日期时间" default-time="12:00:00">
-          </el-date-picker>
+          <el-date-picker
+            v-model="editVipForm.latestReserveTime"
+            type="datetime"
+            placeholder="选择日期时间"
+            default-time="12:00:00"
+            value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
         </el-form-item>
 
         <el-form-item label="备注" prop="remark">
@@ -196,201 +187,201 @@
 
 <!--别找了，很多按钮的点击事件并没有预留methods，自己写吧-->
 <script>
-import axios from 'axios'
-import global_ from '../globalVar.vue'
+import axios from "axios";
+import global_ from "../globalVar.vue";
 export default {
   //挂载时的事件
   mounted() {
     axios({
-      method: 'post',
-      url: global_.serverSrc + '/login/currentUser',
+      method: "post",
+      url: global_.serverSrc + "/login/currentUser",
       headers: {
-        'Content-Type': 'text/plain',
+        "Content-Type": "text/plain",
       },
-      data: window.sessionStorage.getItem('token'),
+      data: window.sessionStorage.getItem("token"),
     }).then((response) => {
-      this.currentUserName = response.data.userName
-      this.currentUserType = response.data.userType
-      if (this.currentUserType != '管理员') {
-        alert(this.currentUserType + '没有此权限')
-        this.$router.push('/homePage')
+      this.currentUserName = response.data.userName;
+      this.currentUserType = response.data.userType;
+      if (this.currentUserType != "管理员") {
+        alert(this.currentUserType + "没有此权限");
+        this.$router.push("/homePage");
       }
-    })
-    this.getAllVips()
+    });
+    this.getAllVips();
   },
   methods: {
     //条件查询
     conditionQuery() {
       //判断是否应重新获取列表
-      var flag = true
+      var flag = true;
       for (let i in this.searchForm) {
-        if (this.searchForm[i] != '') flag = false
+        if (this.searchForm[i] != "") flag = false;
       }
 
       if (flag) {
-        this.getAllVips()
+        this.getAllVips();
       } else {
-        var _this = this
+        var _this = this;
         axios({
-          method: 'post',
-          url: global_.serverSrc + '/vips/search',
+          method: "post",
+          url: global_.serverSrc + "/vips/search",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           data: JSON.stringify(_this.searchForm),
         }).then((resopnse) => {
-          _this.tableData = resopnse.data.data
-        })
+          _this.tableData = resopnse.data.data;
+        });
       }
     },
 
     //获取所有信息
     getAllVips() {
-      var _this = this
-      axios.get(global_.serverSrc + '/vips').then((resopnse) => {
+      var _this = this;
+      axios.get(global_.serverSrc + "/vips").then((resopnse) => {
         if (resopnse.data.code == global_.GET_OK) {
-          _this.tableData = resopnse.data.data
+          _this.tableData = resopnse.data.data;
         } else {
-          alert(resopnse.data.msg)
+          alert(resopnse.data.msg);
         }
-      })
+      });
     },
 
     //显示编辑对话框
     showEditDialog(id) {
       // 发送请求通过id拿到旧数据，填在表格里
-      var _this = this
-      axios.get(global_.serverSrc + '/vips/' + id).then((resopnse) => {
-        _this.editVipForm = resopnse.data.data
-      })
-      this.editVipDialogVisible = true
+      var _this = this;
+      axios.get(global_.serverSrc + "/vips/" + id).then((resopnse) => {
+        _this.editVipForm = resopnse.data.data;
+      });
+      this.editVipDialogVisible = true;
     },
 
     //处理多选框
     handleSelectionChange(val) {
-      this.multipleSelection = val
+      this.multipleSelection = val;
     },
 
     //点击删除按钮时触发的事件
     showDeleteDialog(id) {
       //把id存储起来
-      this.deletionDialogVisible = true
-      this.deleteId = id
+      this.deletionDialogVisible = true;
+      this.deleteId = id;
     },
 
     //删除对话框点击取消时触发的事件
     cancelDeleteDialog() {
       //清空要删除的id序列
-      this.deleteId = 0
-      this.deletionDialogVisible = false
+      this.deleteId = 0;
+      this.deletionDialogVisible = false;
     },
 
     //按照id批量删除
     deleteByIds() {
-      var url = global_.serverSrc + '/vips/'
+      var url = global_.serverSrc + "/vips/";
       //拼接删除用字符串
       for (var i = 0; i < this.multipleSelection.length; i++) {
         //如果为最后一个则不加逗号
         if (i == this.multipleSelection.length - 1) {
-          url = url + this.multipleSelection[i].id
+          url = url + this.multipleSelection[i].id;
         } else {
-          url = url + this.multipleSelection[i].id + ','
+          url = url + this.multipleSelection[i].id + ",";
         }
       }
       //发送删除请求
       axios.delete(url).then((resopnse) => {
         if (resopnse.data.code == global_.DELETE_ERR) {
-          alert('删除失败')
+          alert("删除失败");
         }
-      })
+      });
 
-      this.deletionDialogVisible = false
+      this.deletionDialogVisible = false;
 
       //刷新用户列表
-      this.getAllVips()
-      window.location.reload()
+      this.getAllVips();
+      window.location.reload();
     },
 
     //按照id删除单个
     deleteById() {
-      var url = global_.serverSrc + '/vips/'
-      url = url + this.deleteId
+      var url = global_.serverSrc + "/vips/";
+      url = url + this.deleteId;
       axios.delete(url).then((resopnse) => {
         if (resopnse.data.code == global_.DELETE_ERR) {
-          alert('删除失败')
+          alert("删除失败");
         }
-      })
+      });
 
       //刷新用户列表
-      this.getAllVips()
-      window.location.reload()
+      this.getAllVips();
+      window.location.reload();
     },
 
     //批量删除对话框确定时触发的事件
     massDeletion() {
-      this.deleteByIds()
-      this.massDeletionDialogVisible = false
+      this.deleteByIds();
+      this.massDeletionDialogVisible = false;
     },
 
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`)
+      console.log(`每页 ${val} 条`);
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`)
+      console.log(`当前页: ${val}`);
     },
 
     //打开表格点击确定后添加的请求写在这里
     addVip() {
       this.$refs.addVipFormRef.validate((valid) => {
         if (valid) {
-          var _this = this
+          var _this = this;
           axios({
-            method: 'post',
-            url: global_.serverSrc + '/vips',
+            method: "post",
+            url: global_.serverSrc + "/vips",
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
             data: JSON.stringify(_this.addVipForm),
           }).then((resopnse) => {
             if (resopnse.data.code == global_.SAVE_ERR) {
-              alert('添加失败')
+              alert("添加失败");
             }
-          })
+          });
           //刷新列表
-          _this.getAllVips()
-          window.location.reload()
-          this.addVipDialogVisible = false
+          _this.getAllVips();
+          window.location.reload();
+          this.addVipDialogVisible = false;
         } else {
-          console.log('error submit!!')
-          return false
+          console.log("error submit!!");
+          return false;
         }
-      })
+      });
     },
     //打开表格点击确定后修改的请求写在这里
     editVip() {
       this.$refs.editVipFormRef.validate((valid) => {
         if (valid) {
-          var _this = this
+          var _this = this;
           axios({
-            method: 'put',
-            url: global_.serverSrc + '/vips',
+            method: "put",
+            url: global_.serverSrc + "/vips",
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
             data: JSON.stringify(_this.editVipForm),
           }).then((resopnse) => {
             if (resopnse.data.code == global_.SAVE_ERR) {
-              alert('添加失败')
+              alert("添加失败");
             }
-          })
-          this.getAllVips()
-          window.location.reload()
-          this.editVipDialogVisible = false
+          });
+          this.getAllVips();
+          window.location.reload();
+          this.editVipDialogVisible = false;
         } else {
-          console.log('error submit!!')
-          return false
+          console.log("error submit!!");
+          return false;
         }
-      })
+      });
     },
   },
 
@@ -400,42 +391,40 @@ export default {
       deletionDialogVisible: false,
       addVipDialogVisible: false,
       addVipForm: {
-        id: '',
-        name: '',
-        gender: '',
-        password: '',
-        phoneNumber: '',
-        address: '',
-        email: '',
-        mark: '',
-        level: '',
-        latestCheckInTime: '',
-        latestReserveTime: '',
-        remark: '',
+        id: "",
+        name: "",
+        gender: "",
+        password: "",
+        phoneNumber: "",
+        address: "",
+        email: "",
+        mark: "",
+        level: "",
+        latestCheckInTime: "",
+        latestReserveTime: "",
+        remark: "",
       },
       editVipDialogVisible: false,
       editVipForm: {
-        id: '',
-        name: '',
-        gender: '',
-        password: '',
-        phoneNumber: '',
-        address: '',
-        email: '',
-        mark: '',
-        level: '',
-        latestCheckInTime: '',
-        latestReserveTime: '',
-        remark: '',
+        id: "",
+        name: "",
+        gender: "",
+        password: "",
+        phoneNumber: "",
+        address: "",
+        email: "",
+        mark: "",
+        level: "",
+        latestCheckInTime: "",
+        latestReserveTime: "",
+        remark: "",
       },
       VipRules: {
         // id: [{ required: true, message: '请输入编号', trigger: 'blur' }],
-        name: [{ required: true, message: '请输入会员名', trigger: 'blur' }],
-        gender: [{ required: true, message: '请输入性别', trigger: 'blur' }],
-        password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
-        phoneNumber: [
-          { required: true, message: '请输入电话号码', trigger: 'blur' },
-        ],
+        name: [{ required: true, message: "请输入会员名", trigger: "blur" }],
+        gender: [{ required: true, message: "请输入性别", trigger: "blur" }],
+        password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+        phoneNumber: [{ required: true, message: "请输入电话号码", trigger: "blur" }],
       },
       tableData: [],
       //new
@@ -446,7 +435,7 @@ export default {
         // id: '',
         // name: ''
       },
-    }
+    };
   },
-}
+};
 </script>
