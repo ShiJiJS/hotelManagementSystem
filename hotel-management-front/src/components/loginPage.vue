@@ -8,17 +8,17 @@
           <span>大家好！是我，米老鼠！</span>
         </el-col>
         <el-col :span="12">
-          <img :src=logoURL alt="" style="vertical-align:middle" />
-          <span>米奇妙妙屋</span>
-          <img :src=logoURL alt="" style="vertical-align:middle" />
+          <img :src="logoURL" alt="" style="vertical-align: middle" />
+          <span>米奇妙妙酒店</span>
+          <img :src="logoURL" alt="" style="vertical-align: middle" />
         </el-col>
         <el-col :span="6">
-          <span>對了，要不要進我的妙妙屋</span>
+          <span>對了，要不要管理我的妙妙酒店</span>
         </el-col>
       </el-row>
     </el-header>
     <div class="welcome">
-      <span><p>哦！我差一點忘記了，要讓妙妙屋出現</p></span>
+      <span><p>哦！我差一點忘記了，要管理妙妙酒店</p></span>
       <span><p>我們必須要唸奇妙的咒語</p></span>
     </div>
     <div class="login_box">
@@ -48,7 +48,7 @@ export default {
   name: "loginPage",
   data() {
     return {
-      logoURL: require('../assets/logo.png'),
+      logoURL: require("../assets/logo.png"),
       loginLoading: false, // 登录限制
       loginForm: {
         // 登录的表单数据的绑定对象
@@ -100,22 +100,22 @@ export default {
 <style lang="less" scoped>
 .login_container {
   height: 100vh;
-  background-image: url('../assets/loginpagePic.png');
+  background-image: url("../assets/loginpagePic.png");
   background-color: #eeeeee;
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  background-size:cover
+  background-size: cover;
 }
 .el-header {
-  background-color: rgb(0,0,0);
+  background-color: rgb(0, 0, 0);
   // background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
-  color: rgb(255,255,255);
+  color: rgb(255, 255, 255);
   font-size: 30px;
   line-height: 60px;
   > div {
-    text-align:center;
+    text-align: center;
     img {
-      text-align:center;
+      text-align: center;
       width: 60px;
       height: 60px;
       margin-left: 32px;
@@ -125,7 +125,7 @@ export default {
 }
 .welcome {
   margin-top: 10%;
-  color: rgb(255,255,255);
+  color: rgb(255, 255, 255);
   text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000;
   font-size: 32px;
 }
@@ -138,7 +138,7 @@ export default {
   margin: auto auto;
   width: 450px;
   height: 200px;
-  color: rgb(255,255,255);
+  color: rgb(255, 255, 255);
   .login_form {
   }
   .btns {

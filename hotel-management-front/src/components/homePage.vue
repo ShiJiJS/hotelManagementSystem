@@ -3,12 +3,12 @@
     <el-header>
       <el-row>
         <el-col :span="6">
-          <span>M-I-C-K-E-Y M-O-U-S-E</span>
+          <span>M-I-C-K-E-Y H-O-T-E-L</span>
         </el-col>
         <el-col :span="12">
-          <img :src=logoURL alt="" style="vertical-align:middle" />
-          <span>米奇妙妙屋</span>
-          <img :src=logoURL alt="" style="vertical-align:middle" />
+          <img :src="logoURL" alt="" style="vertical-align: middle" />
+          <span>米奇妙妙酒店</span>
+          <img :src="logoURL" alt="" style="vertical-align: middle" />
         </el-col>
         <el-col :span="4">
           <span class="spanStyle">{{ currentUserType }}{{ currentUserName }}</span>
@@ -114,7 +114,7 @@ export default {
   },
   data() {
     return {
-      logoURL: require('../assets/logo.png'),
+      logoURL: require("../assets/logo.png"),
       activePath: window.sessionStorage.getItem("activePath"),
       currentUserName: "",
       currentUserType: "",
@@ -137,23 +137,23 @@ export default {
 <style lang="less" scoped>
 .homePageContainer {
   height: 100vh;
-  background-image: url('../assets/background.png');
+  background-image: url("../assets/background.png");
   background-color: #eeeeee;
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  background-size:cover
+  background-size: cover;
 }
 
 .el-header {
-  background-color: rgb(0,0,0);
+  background-color: rgb(0, 0, 0);
   // background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
-  color: rgb(255,255,255);
+  color: rgb(255, 255, 255);
   font-size: 30px;
   line-height: 60px;
   > div {
-    text-align:center;
+    text-align: center;
     img {
-      text-align:center;
+      text-align: center;
       width: 60px;
       height: 60px;
       margin-left: 32px;
@@ -162,13 +162,13 @@ export default {
   }
 }
 
-.spanStyle{  
-      white-space: nowrap;  /*强制span不换行*/
-      display: inline-block;  /*将span当做块级元素对待*/
-      width: 320px;  /*限制宽度*/
-      overflow: hidden;  /*超出宽度部分隐藏*/
-      text-overflow: ellipsis;  /*超出部分以点号代替*/
-      font-size: 24px;
+.spanStyle {
+  white-space: nowrap; /*强制span不换行*/
+  display: inline-block; /*将span当做块级元素对待*/
+  width: 320px; /*限制宽度*/
+  overflow: hidden; /*超出宽度部分隐藏*/
+  text-overflow: ellipsis; /*超出部分以点号代替*/
+  font-size: 24px;
 }
 
 .el-menu {
@@ -177,7 +177,7 @@ export default {
   justify-content: center; /* 水平居中 */
 }
 
-.el-menu.el-menu--horizontal{
-    border-bottom:none !important;
+.el-menu.el-menu--horizontal {
+  border-bottom: none !important;
 }
 </style>
