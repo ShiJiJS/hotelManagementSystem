@@ -11,7 +11,7 @@
           <img :src="logoURL" alt="" style="vertical-align: middle" />
         </el-col>
         <el-col :span="4">
-          <span class="spanStyle">{{ currentUserType }}{{ currentUserName }}</span>
+          <span class="spanStyle">{{ currentUserType }} {{ currentUserName }}</span>
         </el-col>
         <el-col :span="2">
           <el-button style="margin-left: 36px" type="danger" @click="logout">退出</el-button>
