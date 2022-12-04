@@ -1,23 +1,31 @@
 <template>
   <el-container class="homePageContainer">
     <el-header>
-      <div>
-        <span>酒店客房管理系统</span>
-      </div>
-      <div>
-        <span>当前登录用户：</span>
-        <span>{{ currentUserType }}</span>
-        <span>{{ currentUserName }}</span>
-        <el-button style="margin-left: 36px" type="danger" @click="logout">退出</el-button>
-      </div>
+      <el-row>
+        <el-col :span="6">
+          <span>M-I-C-K-E-Y M-O-U-S-E</span>
+        </el-col>
+        <el-col :span="12">
+          <img :src=logoURL alt="" style="vertical-align:middle" />
+          <span>米奇妙妙屋</span>
+          <img :src=logoURL alt="" style="vertical-align:middle" />
+        </el-col>
+        <el-col :span="6">
+          <span>当前登录用户：</span>
+          <span>{{ currentUserType }}</span>
+          <span>{{ currentUserName }}</span>
+          <el-button style="margin-left: 36px" type="danger" @click="logout">退出</el-button>
+        </el-col>
+      </el-row>
     </el-header>
-    <el-container>
-      <el-aside width="200px">
+    <el-header>
+      <el-row justify="center" type="flex" background-color="#000">
         <el-menu
           :router="true"
           :unique-opened="true"
           :default-active="activePath"
-          background-color="#286FB7"
+          mode="horizontal"
+          background-color="#000"
           text-color="#fff"
           active-text-color="#fff">
           <el-submenu index="1" :disabled="this.currentUserType != '管理员' ? true : false">
@@ -76,7 +84,9 @@
             <el-menu-item index="vipManagement" @click="saveActivePath('vipManagement')">会员管理</el-menu-item>
           </el-submenu>
         </el-menu>
-      </el-aside>
+      </el-row>
+    </el-header>
+    <el-container>
       <el-main>
         <!-- 路由占位符 -->
         <router-view></router-view>
@@ -104,6 +114,7 @@ export default {
   },
   data() {
     return {
+      logoURL: require('../assets/logo.png'),
       activePath: window.sessionStorage.getItem("activePath"),
       currentUserName: "",
       currentUserType: "",
@@ -126,38 +137,38 @@ export default {
 <style lang="less" scoped>
 .homePageContainer {
   height: 100vh;
+  background-image: url('../assets/background.png');
+  background-color: #eeeeee;
   background-repeat: no-repeat;
   background-position: 50% 50%;
+  background-size:cover
 }
 
 .el-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgb(40, 111, 183);
-  color: rgb(255, 255, 255);
-  font-size: 24px;
-  line-height: 72px;
+  background-color: rgb(0,0,0);
+  // background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+  color: rgb(255,255,255);
+  font-size: 30px;
+  line-height: 60px;
   > div {
-    display: flex;
-    align-items: center;
+    text-align:center;
     img {
+      text-align:center;
       width: 60px;
       height: 60px;
-      border-radius: 10%;
-    }
-    span {
-      margin-left: 8px;
+      margin-left: 32px;
+      margin-right: 32px;
     }
   }
 }
 
-.el-aside {
-  background-color: rgb(40, 111, 183);
-  color: rgb(255, 255, 255);
-}
-
 .el-menu {
   border-right: none;
+  align-items: center; /* 垂直居中 */
+  justify-content: center; /* 水平居中 */
+}
+
+.el-menu.el-menu--horizontal{
+    border-bottom:none !important;
 }
 </style>

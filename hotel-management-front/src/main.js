@@ -10,6 +10,7 @@ Vue.prototype.$axios = axios
 Vue.use(VueAxios, axios)
 
 /*在请求头中验证Token的部分，不会写，摸了 2022/08/22 by Daniel Li
+理论上来说，已经可以直接用了，但是为了后端调试方便暂时不启用 2022/08/23 by Daniel Li
 axios.defaults.baseURL = 
 axios.interceptors.request.use(config => {
   NProgress.start()

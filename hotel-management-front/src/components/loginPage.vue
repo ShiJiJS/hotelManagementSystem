@@ -3,12 +3,23 @@
 <template>
   <div class="login_container">
     <el-header>
-      <div>
-        <span>酒店客房管理系统</span>
-      </div>
+      <el-row>
+        <el-col :span="6">
+          <span>大家好！是我，米老鼠</span>
+        </el-col>
+        <el-col :span="12">
+          <img :src=logoURL alt="" style="vertical-align:middle" />
+          <span>米奇妙妙屋</span>
+          <img :src=logoURL alt="" style="vertical-align:middle" />
+        </el-col>
+        <el-col :span="6">
+          <span>對了，要不要進我的妙妙屋</span>
+        </el-col>
+      </el-row>
     </el-header>
     <div class="welcome">
-      <span><p>欢迎进入酒店客房管理系统，请先登录</p></span>
+      <span><p>哦！我差一點忘記了，要讓妙妙屋出現</p></span>
+      <span><p>我們必須要唸奇妙的咒語</p></span>
     </div>
     <div class="login_box">
       <!--表单提交区域-->
@@ -23,8 +34,8 @@
         </el-form-item>
         <!--按钮区-->
         <el-form-item class="btns">
-          <el-button type="primary" @click="login" :loading="loginLoading">登录</el-button>
-          <el-button type="info" @click="resetLoginForm">重置</el-button>
+          <el-button type="primary" @click="login" :loading="loginLoading">“米斯卡，慕斯卡，米老鼠！”</el-button>
+          <el-button type="info" @click="resetLoginForm">重新再說一次</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -37,6 +48,7 @@ export default {
   name: "loginPage",
   data() {
     return {
+      logoURL: require('../assets/logo.png'),
       loginLoading: false, // 登录限制
       loginForm: {
         // 登录的表单数据的绑定对象
@@ -88,32 +100,34 @@ export default {
 <style lang="less" scoped>
 .login_container {
   height: 100vh;
-  //background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  background-image: url('../assets/loginpagePic.png');
   background-color: #eeeeee;
   background-repeat: no-repeat;
   background-position: 50% 50%;
+  background-size:cover
 }
 .el-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgb(40, 111, 183);
+  background-color: rgb(0,0,0);
   // background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
-  color: #000000;
-  font-size: 24px;
-  line-height: 72px;
+  color: rgb(255,255,255);
+  font-size: 30px;
+  line-height: 60px;
   > div {
-    display: flex;
-    align-items: center;
-    span {
-      margin-left: 8px;
+    text-align:center;
+    img {
+      text-align:center;
+      width: 60px;
+      height: 60px;
+      margin-left: 32px;
+      margin-right: 32px;
     }
   }
 }
 .welcome {
   margin-top: 10%;
-  color: #555555;
-  font-size: 36px;
+  color: rgb(255,255,255);
+  text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000;
+  font-size: 32px;
 }
 .welcome span {
   width: 100%;
@@ -124,6 +138,7 @@ export default {
   margin: auto auto;
   width: 450px;
   height: 200px;
+  color: rgb(255,255,255);
   .login_form {
   }
   .btns {

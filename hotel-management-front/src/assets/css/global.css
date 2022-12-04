@@ -26,24 +26,6 @@ body,
   }
 }
 
-.el-button--primary {
-  color: #FFF!important;
-  background-color: rgb(40, 111, 183)!important;
-  border-color: rgb(40, 111, 183)!important;
-}
-
-.el-submenu__title i {
-  color: rgb(255, 255, 255) !important;
-}
-
-.el-input.is-disabled .el-input__inner {
-  background-color: #fff!important;
-  border-color: #fff!important;
-  color: #000!important;
-  cursor: text!important;
-}
-
-
 .el-form-item {
   margin-left: 20px !important;
 }
