@@ -10,10 +10,10 @@
           <span>米奇妙妙屋</span>
           <img :src=logoURL alt="" style="vertical-align:middle" />
         </el-col>
-        <el-col :span="6">
-          <span>当前登录用户：</span>
-          <span>{{ currentUserType }}</span>
-          <span>{{ currentUserName }}</span>
+        <el-col :span="4">
+          <span class="spanStyle">{{ currentUserType }}{{ currentUserName }}</span>
+        </el-col>
+        <el-col :span="2">
           <el-button style="margin-left: 36px" type="danger" @click="logout">退出</el-button>
         </el-col>
       </el-row>
@@ -34,7 +34,7 @@
               系统管理
             </template>
             <el-menu-item index="userManagement" @click="saveActivePath('userManagement')">用户管理</el-menu-item>
-            <el-menu-item index="logManagement" disabled @click="saveActivePath('logManagement')">日志管理</el-menu-item>
+            <!--<el-menu-item index="logManagement" disabled @click="saveActivePath('logManagement')">日志管理</el-menu-item>-->
           </el-submenu>
           <el-submenu index="2" :disabled="this.currentUserType != '管理员' && this.currentUserType != '经理' ? true : false">
             <template slot="title">
@@ -43,7 +43,7 @@
             </template>
             <el-menu-item index="reservationReportManagement" @click="saveActivePath('reservationReportManagement')">预定客人报表</el-menu-item>
             <el-menu-item index="checkInReportManagement" @click="saveActivePath('checkInReportManagement')">入住客人报表</el-menu-item>
-            <el-menu-item index="checkOutReportManagement" disabled @click="saveActivePath('checkOutReportManagement')">离店客人报表</el-menu-item>
+            <!--<el-menu-item index="checkOutReportManagement" disabled @click="saveActivePath('checkOutReportManagement')">离店客人报表</el-menu-item>-->
             <el-menu-item index="receiptsReportManagement" @click="saveActivePath('receiptsReportManagement')">财务进账报表</el-menu-item>
           </el-submenu>
           <el-submenu index="3" :disabled="this.currentUserType != '管理员' && this.currentUserType != '前台人员' ? true : false">
@@ -124,7 +124,7 @@ export default {
   methods: {
     logout() {
       window.sessionStorage.clear();
-      this.$router.push("/login");
+      this.$router.push("/loginPage");
     },
     saveActivePath(activePath) {
       window.sessionStorage.setItem("activePath", activePath);
@@ -160,6 +160,15 @@ export default {
       margin-right: 32px;
     }
   }
+}
+
+.spanStyle{  
+      white-space: nowrap;  /*强制span不换行*/
+      display: inline-block;  /*将span当做块级元素对待*/
+      width: 320px;  /*限制宽度*/
+      overflow: hidden;  /*超出宽度部分隐藏*/
+      text-overflow: ellipsis;  /*超出部分以点号代替*/
+      font-size: 24px;
 }
 
 .el-menu {

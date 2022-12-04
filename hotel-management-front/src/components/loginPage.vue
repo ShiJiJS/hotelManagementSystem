@@ -5,7 +5,7 @@
     <el-header>
       <el-row>
         <el-col :span="6">
-          <span>大家好！是我，米老鼠</span>
+          <span>大家好！是我，米老鼠！</span>
         </el-col>
         <el-col :span="12">
           <img :src=logoURL alt="" style="vertical-align:middle" />
@@ -35,7 +35,7 @@
         <!--按钮区-->
         <el-form-item class="btns">
           <el-button type="primary" @click="login" :loading="loginLoading">“米斯卡，慕斯卡，米老鼠！”</el-button>
-          <el-button type="info" @click="resetLoginForm">重新再說一次</el-button>
+          <el-button type="info" @click="resetLoginForm">重新唸</el-button>
         </el-form-item>
       </el-form>
     </div>
